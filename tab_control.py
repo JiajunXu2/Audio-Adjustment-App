@@ -9,20 +9,19 @@ restricted_urls = ["www.reddit.com",
                    "twitter.com",
                    "www.facebook.com",
                    ]
-"""
-for urls in restricted_urls:
-    domain = urlparse(urls).netloc
-    print(domain)
-"""
- 
+
+# constantly check if new tab is restricted site
 chrome = webdriver.Chrome()
 chrome.get("https://www.google.com/")
 while True:
-    active_window = chrome.switch_to.window(chrome.window_handles[0])
-    domain = urlparse(active_window.current_url)
+    print(chrome.window_handles)
+    rightmost = len(chrome.window_handles) - 1
+    chrome.switch_to.window(chrome.window_handles[rightmost])
+    domain = urlparse(chrome.current_url).netloc
+    print(domain)
     if domain in restricted_urls:
         chrome.close()
-    
-    time.sleep(2)
+        chrome.switch_to.window(chrome.window_handles[0])
+    time.sleep(8)
 
 

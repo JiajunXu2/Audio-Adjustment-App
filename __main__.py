@@ -2,11 +2,10 @@ import speech_recognition as sr
 from googletrans import Translator
 import pyaudio
 import os
+import sys
 
-translator = Translator()
-p = pyaudio.PyAudio()
-
-def get_devices():
+# prints a list of audio devices
+def get_devices(p):
     for i in range(p.get_device_count()):
         device_info = p.get_device_info_by_index(i)
         print(str(i) + " : " + device_info["name"])
@@ -26,9 +25,22 @@ def mic_input():
     except sr.RequestError:
         print("Could not request results from Whisper")
 
-def desktop_input():
-    stream = p.open()
+# opens desktop audio stream
+def desktop_input(p):
+    subtitles = open("subtitles.txt", "a")
+    stream = p.open(format= pyaudio.paInt16,
+                    channels= 2,
+                    rate= 44100,
+                    input= True,
+                    #input_device_index= None,
+                    frames_per_buffer = 1024,
+                    )
+    subtitles.close()
+    stream.close()
+    p.terminate()
 
 if __name__ == "__main__":
-    get_devices()
-    # text is .txt file 
+    translator = Translator()
+    p = pyaudio.PyAudio()
+    get_devices(p)
+    desktop_input(p)

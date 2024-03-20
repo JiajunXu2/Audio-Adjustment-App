@@ -4,6 +4,9 @@ import pyaudio
 import os
 import sys
 
+translator = Translator()
+p = pyaudio.PyAudio()
+
 # prints a list of audio devices
 def get_devices(p):
     for i in range(p.get_device_count()):
@@ -26,7 +29,7 @@ def mic_input():
         print("Could not request results from Whisper")
 
 # opens desktop audio stream
-def desktop_input(p):
+def desktop_input():
     subtitles = open("subtitles.txt", "a")
     stream = p.open(format= pyaudio.paInt16,
                     channels= 2,
@@ -35,12 +38,13 @@ def desktop_input(p):
                     #input_device_index= None,
                     frames_per_buffer = 1024,
                     )
+    while True:
+        pass
+
     subtitles.close()
     stream.close()
     p.terminate()
 
 if __name__ == "__main__":
-    translator = Translator()
-    p = pyaudio.PyAudio()
-    get_devices(p)
-    desktop_input(p)
+    #get_devices(p)
+    desktop_input()

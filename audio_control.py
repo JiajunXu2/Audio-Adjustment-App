@@ -27,13 +27,14 @@ def mic_input():
 
 # opens desktop audio stream
 def desktop_input(p: pyaudio.PyAudio, txt_file: str):
+    print("Now recording desktop audio...")
     CHUNK = 1024
     subtitles = open(txt_file, "a")
     stream = p.open(format= pyaudio.paInt16,
                     channels= 2,
                     rate= 44100,
                     input= True,
-                    #input_device_index= None,
+                    input_device_index= None,
                     frames_per_buffer = CHUNK,
                     )
     while True:
@@ -46,8 +47,12 @@ def desktop_input(p: pyaudio.PyAudio, txt_file: str):
     stream.close()
     p.terminate()
 
+# gets volume of audio stream
+def volume_check():
+    pass
+
 if __name__ == "__main__":
     translator = Translator()
     p = pyaudio.PyAudio()
-    #get_devices(p)
-    desktop_input()
+    get_devices(p)
+    #desktop_input(p, "E:\Projects-Python\Audio-Adjustment-App\subtitles.txt")

@@ -1,5 +1,4 @@
 import speech_recognition as sr
-from googletrans import Translator
 import pyaudio
 import os
 import sys
@@ -51,8 +50,12 @@ def desktop_input(p: pyaudio.PyAudio, txt_file: str):
 def volume_check():
     pass
 
+# translates audio to english
+def translate(input):
+    pass
+    
 if __name__ == "__main__":
-    translator = Translator()
-    p = pyaudio.PyAudio()
-    get_devices(p)
+    pass
+    #p = pyaudio.PyAudio()
+    #get_devices(p)
     #desktop_input(p, "E:\Projects-Python\Audio-Adjustment-App\subtitles.txt")

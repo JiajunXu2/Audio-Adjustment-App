@@ -1,5 +1,6 @@
 import speech_recognition as sr
 import pyaudio
+from pycaw.pycaw import AudioUtilities
 import os
 import sys
 
@@ -46,6 +47,9 @@ def desktop_input(p: pyaudio.PyAudio, txt_file: str):
     stream.close()
     p.terminate()
 
+def video_input():
+    pass
+
 # gets volume of audio stream
 def volume_check():
     pass
@@ -55,7 +59,6 @@ def translate(input):
     pass
     
 if __name__ == "__main__":
-    pass
-    #p = pyaudio.PyAudio()
+    p = pyaudio.PyAudio()
     #get_devices(p)
-    #desktop_input(p, "E:\Projects-Python\Audio-Adjustment-App\subtitles.txt")
+    desktop_input(p, "E:\Projects-Python\Audio-Adjustment-App\subtitles.txt")
